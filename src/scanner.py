@@ -25,7 +25,11 @@ def find_large_folders(base_dirs: list[str], min_mb: float = 500.0, console=None
         for base_dir in base_dirs:
             if not os.path.exists(base_dir):
                 continue
-            for item in os.listdir(base_dir):
+            try:
+                items = os.listdir(base_dir)
+            except OSError:
+                continue
+            for item in items:
                 item_path = os.path.join(base_dir, item)
                 if os.path.isdir(item_path):
                     size = get_folder_size_mb(item_path)
