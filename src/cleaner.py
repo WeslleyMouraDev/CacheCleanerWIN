@@ -10,7 +10,11 @@ def get_free_space_mb(drive: str) -> float:
 def safe_delete_folder_contents(folder_path: str):
     if not os.path.exists(folder_path):
         return
-    for item in os.listdir(folder_path):
+    try:
+        items = os.listdir(folder_path)
+    except (PermissionError, OSError):
+        return
+    for item in items:
         item_path = os.path.join(folder_path, item)
         try:
             if os.path.isfile(item_path):

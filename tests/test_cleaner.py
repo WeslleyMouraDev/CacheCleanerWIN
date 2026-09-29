@@ -35,6 +35,11 @@ def test_safe_delete_folder_contents_handles_exceptions(tmp_path):
     assert file1.exists()
 
 
+def test_safe_delete_folder_contents_listdir_permission_error(tmp_path):
+    with patch("os.listdir", side_effect=PermissionError("Access denied")):
+        safe_delete_folder_contents(str(tmp_path))
+
+
 def test_clean_system_caches():
     mock_console = MagicMock()
     status_mock = MagicMock()
