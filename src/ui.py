@@ -1,7 +1,6 @@
 from rich.console import Console
 from rich.panel import Panel as _RichPanel
 from rich.prompt import Confirm
-from rich.table import Table
 
 console = Console()
 
